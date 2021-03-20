@@ -1,0 +1,26 @@
+{
+  "name": "rtrevisiol.github.io",
+  "version": "0.0.1",
+  "description": "Ruggero Trevisiol web site",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "npx lerna bootstrap --hoist -- --production",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "new_version": "npx lerna version --conventional-commits",
+    "new_alpha_version": "npx lerna version --conventional-prerelease --conventional-commits",
+    "new_graduate_version": "npx lerna version --conventional-graduate --conventional-commits"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtrevisiol/rtrevisiol.github.io.git"
+  },
+  "author": "Ruggero Trevisiol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rtrevisiol/rtrevisiol.github.io/issues"
+  },
+  "homepage": "https://github.com/rtrevisiol/rtrevisiol.github.io#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
