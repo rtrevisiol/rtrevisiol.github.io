@@ -1,13 +1,35 @@
 <html>
-  <head></head>
-  <body>
-    <form onsubmit="alert('ciao')">
-      <fieldset>
-        <legend>Calcolo combinatorio</legend>
-        <label>Numero di elementi da raggruppare (90 nel caso del superenalotto)</label><input name="n" type="number"></input><br />
-      <label>Numero di elementi in un singolo gruppo (6 nel caso del superenalotto)</label><input name="n" type="number"></input><br />
-    <input type="submit" value="Calcola il numero di combinazioni" id='smit'>
-      </fieldset>
-    </form>
-  </body>
+
+<head>
+  <title>Calcolo combinatorio</title>
+  <link rel="stylesheet" href=".\packages\site\src\styles.css">
+</head>
+
+<body>
+  <div id="loader">
+    <div class="loader">
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <div class="dots"></div>
+      <div class="dots"></div>
+    </div>
+  </div>
+  <form onsubmit="return false">
+    <fieldset>
+      <legend>Calcolo combinatorio</legend>
+      <label>Numero di elementi da raggruppare (90 nel caso del superenalotto)</label><input name="n"
+        type="number"></input><br />
+      <label>Numero di elementi in un singolo gruppo (6 nel caso del superenalotto)</label><input name="k"
+        type="number"></input><br />
+      <input type="button" onclick="calcolo(n.value,k.value)" value="Calcola il numero di combinazioni" /><br />
+      <input type="button" onclick="combinazioni(n.value,k.value)" value="Calcola le combinazioni" /><br />
+      <input type="button" onclick="stampa()" value="Stampa le combinazioni" /><br />
+    </fieldset>
+  </form>
+  <div id="IDStampa"></div>
+
+  <script type="text/javascript" src=".\packages\site\src\script.js"></script>
+</body>
+
 </html>

@@ -1,0 +1,90 @@
+@media print {
+    @page
+    {
+        size:  auto; 
+        margin: 0mm; 
+    }
+    html
+    {
+        background-color: #FFFFFF;
+        margin: 0px;  
+    }
+    body
+    {
+        margin: 0mm 0mm 0mm 0mm; /* gestisci qui i margini del contenuto */
+    }
+}/*print*/
+
+/*PRINT LAYOUT */
+#IDStampa, #IDStampa * {
+    visibility: hidden; /*Nascondo se non siamo in fase di stampa*/
+  }
+  @media print {
+    #IDStampa, #IDStampa * {
+      visibility: visible; /*Mostro se siamo in fase di stampa*/
+  position:absolute;
+  top:0; left:0;
+    }
+  }
+  /*PRINT LAYOUT */
+
+
+  /** code by webdevtrick ( https://webdevtrick.com ) **/
+body {
+    background-color: whitesmoke;
+}
+/* MOD by Rug */
+#loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0,0,0,0.3);
+    display: none;
+}
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.loader .dots {
+    position: absolute;
+    padding: 10px;
+    border-radius: 50%;
+    background: #f05855;
+    -webkit-animation: myani 1s ease-in-out 0s infinite;
+    animation: myani 1s ease-in-out 0s infinite;
+}
+.loader .dots:nth-child(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+.loader .dots:nth-child(2) {
+    -webkit-animation-delay: 0.15s;
+    animation-delay: 0.15s;
+}
+.loader .dots:nth-child(3) {
+    -webkit-animation-delay: 0.30s;
+    animation-delay: 0.30s;
+}
+.loader .dots:nth-child(4) {
+    -webkit-animation-delay: 0.45s;
+    animation-delay: 0.45s;
+}
+
+
+
+@keyframes myani {
+    0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
