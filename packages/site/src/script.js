@@ -3,6 +3,7 @@ const loading = (active) => {
 
     let div = document.getElementById("loader");
     active ? div.style.display = "block" : div.style.display = "none";
+    
     resolve();
   }))
 }
@@ -57,12 +58,23 @@ const combinazioni = function (n, k) {
   }
 
 
-  setTimeout(
+  loading(true).then(() => {
     //return comb(k, range(1, n));
-    window.pippo = comb(k, range(1, n))
-    , 0);
-  console.log(window.pippo);
-  loading(false);
+    let combs = comb(k, range(1, n));
+    loading(false);
+    /* var obj = window.pippo;//{a: 123, b: "4 5 6"};
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj)); */
+
+    var a = document.createElement('a');
+    //a.href = 'data:' + data;
+    a.href = 'data:' + "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(combs));
+    a.download = 'data.json';
+    a.innerHTML = 'download JSON';
+
+    var container = document.getElementById('container');
+    container.appendChild(a);
+  });
+
   /*
     .map(function (x) {
       return x.join(' ');
