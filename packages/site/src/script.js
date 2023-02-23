@@ -3,7 +3,7 @@ const loading = (active) => {
 
     let div = document.getElementById("loader");
     active ? div.style.display = "block" : div.style.display = "none";
-    
+
     resolve();
   }))
 }
@@ -35,8 +35,9 @@ const calcolo = (n, k) => {
   loading(false);
 }
 
-const combinazioni = function (n, k) {
-  loading(true);
+const combinazioni = function (k, n) {
+
+  // n -> [a] -> [[a]]
   function comb(n, lst) {
     if (!n) return [[]];
     if (!lst.length) return [];
@@ -49,6 +50,19 @@ const combinazioni = function (n, k) {
     }).concat(comb(n, xs));
   }
 
+  // f -> f
+  function memoized(fn) {
+    m = {};
+    return function (x) {
+      var args = [].slice.call(arguments),
+        strKey = args.join('-');
+
+      v = m[strKey];
+      if ('u' === (typeof v)[0])
+        m[strKey] = v = fn.apply(null, args);
+      return v;
+    }
+  }
 
   // [m..n]
   function range(m, n) {
@@ -57,29 +71,27 @@ const combinazioni = function (n, k) {
     });
   }
 
+  var fnMemoized = memoized(comb),
+    lstRange = range(1, k);
 
-  loading(true).then(() => {
-    //return comb(k, range(1, n));
-    let combs = comb(k, range(1, n));
-    loading(false);
-    /* var obj = window.pippo;//{a: 123, b: "4 5 6"};
-    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj)); */
+  var a = document.createElement('a');
+  //a.href = 'data:' + data;
+  //a.href = 'data:' + "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(combs));
+  a.href = 'data:' + "text/json;charset=utf-8," + encodeURIComponent(fnMemoized(n, lstRange).map(function (x) {
+    return x.join(',');
+  }).join('\n'));
+  a.download = 'data.csv';
+  a.innerHTML = 'download CSV';
 
-    var a = document.createElement('a');
-    //a.href = 'data:' + data;
-    a.href = 'data:' + "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(combs));
-    a.download = 'data.json';
-    a.innerHTML = 'download JSON';
+  var container = document.getElementById('container');
+  container.appendChild(a);
 
-    var container = document.getElementById('container');
-    container.appendChild(a);
-  });
+  /* return fnMemoized(n, lstRange)
 
-  /*
-    .map(function (x) {
-      return x.join(' ');
-    }).join('\n');
-*/
+  .map(function (x) {
+    return x.join(' ');
+  }).join('\n'); */
+  return false;
 }
 
 const stampa = () => {
