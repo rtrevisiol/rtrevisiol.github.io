@@ -1,4 +1,21 @@
 var db = openDatabase('DB_combo', '1.0', 'database', 10 * 1024 * 1024 * 1024);
+var ultimaCombo = [];
+let ultimiNumeri = () => {
+  //Fonte https://www.superenalotto.it/archivio-estrazioni
+  //https://www.gntn-pgd.it/gntn-info-ext-web/rest/gioco/statistiche/superenalotto/sestine/daticompleti?idPartner=GIOCHINUMERICI_INFO
+  //per recuperare i dati : temp1.dati.gruppi[0].elementi.filter(numero => numero.valori[1].valore == "0").map((el)=>  el.simbolo)
+  function returnVal(combo) {
+    ultimaCombo = JSON.parse(combo).dati.gruppi[0].elementi.filter(numero => numero.valori[1].valore == "0").map((el)=>  el.simbolo);
+  }
+  let file = "https://www.gntn-pgd.it/gntn-info-ext-web/rest/gioco/statistiche/superenalotto/sestine/daticompleti?idPartner=GIOCHINUMERICI_INFO"
+  fetch(file)
+    .then(x => x.text())
+    .then((y) => {
+      returnVal(y)
+    })
+    .catch(error => new Error(error));
+}
+ultimiNumeri();
 
 const loading = (active) => {
   return (new Promise(function (resolve, reject) {
@@ -167,13 +184,14 @@ const controllo = (arrayCombo) => {
   let decine = (combo) => {
     let dec = [];
     combo.forEach((element, i, arr) => {
-      let decina = Math.floor(Math.round(element)/10);
+      let decina = Math.floor(Math.round(element) / 10);
       dec.push(decina);
     });
     let uniqueItems = [...new Set(dec)]
     let result = uniqueItems.length > 3;//accetto solo 3 numeri con la stessa decina
     return result;
   }
+
   return (differenze(arrayCombo) && decine(arrayCombo));
 }
 
