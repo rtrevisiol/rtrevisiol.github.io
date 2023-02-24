@@ -1,3 +1,5 @@
+var db = openDatabase('DB_combo', '1.0', 'database', 10 * 1024 * 1024 * 1024);
+
 const loading = (active) => {
   return (new Promise(function (resolve, reject) {
 
@@ -153,7 +155,7 @@ const combinazioni = function (n, k) {
 function bitprint(u) {
   var s = [];
   for (var n = 0; u; ++n, u >>= 1)
-    if (u & 1) s.push(n+1);
+    if (u & 1) s.push(n + 1);
   return s;
 }
 function bitcount(u) {
@@ -161,12 +163,39 @@ function bitcount(u) {
   return n;
 }
 function combinazioni(n, c) {
+  let queryPulizia = "DROP TABLE combinazioni;";
+  db.transaction(function (tx) {
+    tx.executeSql(queryPulizia);
+  });
+
   // var s = [];
-  for (var u = 0; u < 1 << n; u++){
-    if (bitcount(u) == c){
-      console.log(bitprint(u))
+  let query = "CREATE TABLE combinazioni (";
+  for (let i = 1; i < (Math.round(c) + 1); i++) {
+    i == c ? query += "numero" + i : query += "numero" + i + ",";
+  }
+  query += ");"
+  console.log(query);
+  db.transaction(function (tx) {
+    tx.executeSql(query);
+  });
+
+  let query_scrittura = "INSERT INTO combinazioni (";
+  for (let i = 1; i < (Math.round(c) + 1); i++) {
+    i == c ? query_scrittura += "numero" + i : query_scrittura += "numero" + i + ",";
+  }
+  query_scrittura += ") VALUES("
+
+  for (var u = 0; u < 1 << n; u++) {
+    if (bitcount(u) == c) {
+      let queryEseguibile = query_scrittura;
+      queryEseguibile += bitprint(u).toString() + ");";
+      console.log(queryEseguibile);
+      db.transaction(function (tx) {
+        tx.executeSql(queryEseguibile);
+      });
+      // console.log(bitprint(u))
     }
-      // s.push(bitprint(u))
+    // s.push(bitprint(u))
   }
   // window.pippo = s.sort();
   // return window.pippo;
