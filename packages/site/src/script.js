@@ -152,6 +152,21 @@ const combinazioni = function (n, k) {
   loading(false);
 } */
 
+
+const controllo = (arrayCombo) => {
+  let lunghezza = arrayCombo.length;
+  let differenze = (combo) => {
+    let diff = [];
+    combo.forEach((element, i, arr) => {
+      arr[i - 1] ? diff.push((element - arr[i - 1])) : void (0);
+    });
+    let uniqueItems = [...new Set(diff)]
+    let result = uniqueItems.length > 3;
+    return result;
+  }
+  return differenze(arrayCombo);
+}
+
 function bitprint(u) {
   var s = [];
   for (var n = 0; u; ++n, u >>= 1)
@@ -187,13 +202,15 @@ function combinazioni(n, c) {
 
   for (var u = 0; u < 1 << n; u++) {
     if (bitcount(u) == c) {
-      let queryEseguibile = query_scrittura;
-      queryEseguibile += bitprint(u).toString() + ");";
-      console.log(queryEseguibile);
-      db.transaction(function (tx) {
-        tx.executeSql(queryEseguibile);
-      });
-      // console.log(bitprint(u))
+      if (controllo(bitprint(u))) {
+        let queryEseguibile = query_scrittura;
+        queryEseguibile += bitprint(u).toString() + ");";
+        console.log(queryEseguibile);
+        db.transaction(function (tx) {
+          tx.executeSql(queryEseguibile);
+        });
+        // console.log(bitprint(u))
+      }
     }
     // s.push(bitprint(u))
   }
