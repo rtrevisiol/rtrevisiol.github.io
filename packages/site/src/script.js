@@ -161,10 +161,20 @@ const controllo = (arrayCombo) => {
       arr[i - 1] ? diff.push((element - arr[i - 1])) : void (0);
     });
     let uniqueItems = [...new Set(diff)]
-    let result = uniqueItems.length > 3;
+    let result = uniqueItems.length > 3;//accetto solo 3 numeri che si distanziano tra loro per lo stesso valore
     return result;
   }
-  return differenze(arrayCombo);
+  let decine = (combo) => {
+    let dec = [];
+    combo.forEach((element, i, arr) => {
+      let decina = Math.floor(Math.round(element)/10);
+      dec.push(decina);
+    });
+    let uniqueItems = [...new Set(dec)]
+    let result = uniqueItems.length > 3;//accetto solo 3 numeri con la stessa decina
+    return result;
+  }
+  return (differenze(arrayCombo) && decine(arrayCombo));
 }
 
 function bitprint(u) {
