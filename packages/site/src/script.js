@@ -1,11 +1,13 @@
 var db = openDatabase('DB_combo', '1.0', 'database', 10 * 1024 * 1024 * 1024);
 var ultimaCombo = [];
+var penultimaCombo = [];
 let ultimiNumeri = () => {
   //Fonte https://www.superenalotto.it/archivio-estrazioni
   //https://www.gntn-pgd.it/gntn-info-ext-web/rest/gioco/statistiche/superenalotto/sestine/daticompleti?idPartner=GIOCHINUMERICI_INFO
   //per recuperare i dati : temp1.dati.gruppi[0].elementi.filter(numero => numero.valori[1].valore == "0").map((el)=>  el.simbolo)
   function returnVal(combo) {
     ultimaCombo = JSON.parse(combo).dati.gruppi[0].elementi.filter(numero => numero.valori[1].valore == "0").map((el)=>  el.simbolo);
+    penultimaCombo = JSON.parse(combo).dati.gruppi[0].elementi.filter(numero => numero.valori[1].valore == "1").map((el)=>  el.simbolo);
   }
   let file = "https://www.gntn-pgd.it/gntn-info-ext-web/rest/gioco/statistiche/superenalotto/sestine/daticompleti?idPartner=GIOCHINUMERICI_INFO"
   fetch(file)
