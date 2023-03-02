@@ -22,11 +22,13 @@
         type="number"></input><br />
       <label>Numero di elementi in un singolo gruppo (6 nel caso del superenalotto)</label><input name="k"
         type="number"></input><br />
-      <input type="button" onclick="calcolo(n.value,k.value)" value="Calcola il numero di combinazioni" /><br />
+      <!-- <input type="button" onclick="console.log(calcolo(n.value,k.value))" value="Calcola il numero di combinazioni" /><br /> -->
       <input type="button" onclick="window.pippo=combinazioni(n.value,k.value)" value="Calcola le combinazioni" /><br />
       <input type="button" onclick="stampa()" value="Stampa le combinazioni" /><br />
     </fieldset>
   </form>
+  <div id="result"></div>
+  <div id="percentuale"></div>
   <div id="IDStampa"></div>
 
   <script type="text/javascript" src=".\packages\site\src\script.js"></script>
