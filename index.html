@@ -1,13 +1,99 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta content='text/html; charset=utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Rtrevisiol.GitHub.io by rtrevisiol</title>
-  </head>
-  <body>
-    <div id="container">
-    <h1>=SITO IN COSTRUZIONE=</h1>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sito in Costruzione</title>
+  <style>
+    /* Reset basilare */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    /* Sfondo a gradiente */
+    body {
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 600% 600%;
+      animation: Gradiente 15s ease infinite;
+    }
+    @keyframes Gradiente {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* Container centrale */
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Titolo con effetto pulsante */
+    #container h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+      50%    { text-shadow: 0 0 20px rgba(255,255,255,1); }
+    }
+
+    /* Loader a ingranaggio in CSS */
+    .loader {
+      width: 80px;
+      height: 80px;
+      border: 8px solid rgba(255,255,255,0.3);
+      border-top: 8px solid #fff;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer invitante */
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    footer a:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="loader"></div>
+    <h1>Sito in Costruzione</h1>
+    <p>Stiamo lavorando per offrirti la migliore esperienza. Torna a trovarci tra poco!</p>
+  </div>
+  <!--
+  <footer>
+    Vuoi restare aggiornato? <a href="#">Iscriviti alla newsletter</a>
+  </footer>
+  -->
+</body>
 </html>
